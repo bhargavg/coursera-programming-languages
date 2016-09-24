@@ -86,7 +86,7 @@ fun dates_in_months(dates: (int*int*int) list, months: int list) =
  * case, which is okay.
  *)
 fun get_nth(xs: string list, n: int) =
-  if n = 0
+  if n = 1
   then hd xs
   else get_nth(tl xs, n - 1)
 
@@ -124,14 +124,8 @@ fun date_to_string(date: (int*int*int)) =
  * exception to occur if this is not the case.
  *) 
 fun number_before_reaching_sum(sum: int, xs: int list) =
-  let 
-    fun helper(xs: int list, index: int, cum_sum: int) =
-      if cum_sum + hd xs > sum
-      then index
-      else helper(tl xs, index + 1, cum_sum + hd xs)
-  in
-    helper(xs, 0, 0)
-  end
+  if sum > hd xs then 1 + number_before_reaching_sum(sum - hd xs, tl xs)
+  else 0
 
 (* Problem:
  *  Write a function what_month that takes a day of year (i.e., an int between 1
@@ -168,9 +162,12 @@ fun oldest(dates: (int*int*int) list) =
       fun helper(oldest: (int*int*int), dates: (int*int*int) list) =
         if null dates
         then oldest
-        else if is_older(oldest, hd dates)
-        then oldest
-        else helper(hd dates, tl dates)
+        else 
+          let 
+            val oldest = if is_older(oldest, hd dates) then hd dates else oldest
+          in
+            helper(oldest, tl dates)
+          end
     in
       SOME (helper(hd dates, tl dates))
     end
