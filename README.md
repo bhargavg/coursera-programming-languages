@@ -18,7 +18,7 @@ $ brew install smlnj
 ## Running the `.sml` files
 ```bash
 $ cd path/to/checkout/directory
-$ source ./bin/dev_setup.sml  # setup PATH variable
+$ source ./bin/dev_setup.sh  # setup PATH variable
 $
 $ # Run tests for week 2
 $ run_tests 2
