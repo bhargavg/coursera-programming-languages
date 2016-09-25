@@ -23,24 +23,64 @@ datatype rank  = Jack
                | Num of int
 
 datatype card  = Card of suite * rank
+type card_type = suite * rank
 
 
 
 (* Imaginary language grammer *)
-datatype exp = Constant of int
-             | Negate of exp
-             | Add of exp * exp
-             | Subtract of exp * exp
-             | Multiply of exp * exp
-             | Divide of exp * exp
+datatype exp = Const of int
+             | Neg of exp
 
 fun eval e = 
   case e of
-       Constant x => x
-     | Negate x => ~ (eval x)
-     | Add (x, y) => (eval x) + (eval y)
-     | Subtract(x, y) => (eval x) - (eval y)
-     | Multiply(x, y) => (eval x) * (eval y)
-     | Divide(x, y) => (eval x) div (eval y)
+       Const x => x
+     | Neg x => ~ (eval x)
 
-val x = eval(Add(Constant 5, Add(Constant 5, Negate( Constant 6))))
+val x = eval(Const 5)
+
+
+
+(* Find largest constant in the expression *)
+datatype expression = Constant of int
+                    | Negate of expression
+                    | Add of expression * expression
+                    | Multiply of expression * expression
+
+fun evaluate e = 
+  case e of
+       Constant x => x
+     | Negate x   => ~ (evaluate x)
+     | Add(x, y)  => (evaluate x) + (evaluate y)
+     | Multiply(x, y) => (evaluate x) * (evaluate y)
+
+fun max_constant e =
+  let 
+    fun max_of_expressions(e1: expression, e2: expression) =
+      Int.max( max_constant(e1), max_constant(e2) )
+  in
+    case e of 
+         Constant x => x
+       | Negate x   => max_constant x
+       | Add (x, y) => Int.max( max_constant x, max_constant y)
+       | Multiply(x,y) => Int.max( max_constant x, max_constant y)
+  end
+
+val test_exp = Add(Constant ~9, Negate (Constant ~4));
+
+
+
+
+(* Defining our own List type 
+ * List can be defined recursively as follows: 
+ *)
+datatype IntList = Empty
+                 | Cons of int * IntList
+
+fun append(xs: IntList, ys: IntList) =
+  case xs of
+       Empty => ys
+     | Cons(head, tail) => Cons(head, append(tail, ys))
+
+val x_list = Cons(2, Cons(1, Empty))
+val y_list = Cons(5, Cons(6, Empty))
+

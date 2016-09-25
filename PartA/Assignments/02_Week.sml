@@ -180,7 +180,3 @@ fun oldest(dates: (int*int*int) list) =
  * second argument multiple times has no more effect than having it once. 
  * (Hint: Remove duplicates, then use previous work.)
  *)
-fun sort(xs: int list) =
-
-fun number_in_months_challenge(dates: (int*int*int) list, months: int list) =
-  number_in_months(unique(sort(months))
