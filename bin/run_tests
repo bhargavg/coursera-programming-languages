@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
 # Usage: 
-#   $ ./bin/test.sh WEEK_NUMBER
+#   $ ./bin/run_tests WEEK_NUMBER
 # Example:
-#   $ ./bin/test.sh 2    # to run week 2 tests
+#   $ ./bin/run_tests 2    # to run week 2 tests
 
 
 if [ -z "$1" ]
 then
     echo "Usage: "
-    echo "./bin/test.sh WEEK_NUMBER"
+    echo "./bin/run_tests WEEK_NUMBER"
     echo ""
     echo "Example: "
-    echo "./bin/test.sh 2"
+    echo "./bin/run_tests 2"
     exit 1
 fi
 

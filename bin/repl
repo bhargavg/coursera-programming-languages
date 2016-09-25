@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+
+# Usage:
+#   $ ./bin/repl FILE_NAME
+# Example:
+#   $ ./bin/repl Datatype
+
+FILE=""
+if [ -n "$1" ]
+then
+    FILE="PartA/$1.sml"
+fi
+
+rlwrap sml $FILE

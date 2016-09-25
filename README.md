@@ -17,8 +17,14 @@ $ brew install smlnj
 
 ## Running the `.sml` files
 ```bash
-$ rlwrap sml   # launches REPL inside rlwrap
+$ cd path/to/checkout/directory
+$ source ./bin/dev_setup.sml  # setup PATH variable
+$
+$ # Run tests for week 2
+$ run_tests 2
+$
+$ # Launch REPL
+$ repl Functions  # Optionally provide source filename to load
 - (* REPL changes the prompt to a `-` character *)
-- (* Load the source file using `use` command *)
-- use "filename.sml";
+-
 ```
