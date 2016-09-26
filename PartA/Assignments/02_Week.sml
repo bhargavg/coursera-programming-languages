@@ -107,7 +107,7 @@ fun date_to_string(date: (int*int*int)) =
     val year = #1 date
     val month = #2 date
     val day = #3 date
-    val m = get_nth(months, month - 1)
+    val m = get_nth(months, month)
     val d = Int.toString(day)
     val y = Int.toString(year)
   in
@@ -164,7 +164,7 @@ fun oldest(dates: (int*int*int) list) =
         then oldest
         else 
           let 
-            val oldest = if is_older(oldest, hd dates) then hd dates else oldest
+            val oldest = if is_older(oldest, hd dates) then oldest else hd dates
           in
             helper(oldest, tl dates)
           end
