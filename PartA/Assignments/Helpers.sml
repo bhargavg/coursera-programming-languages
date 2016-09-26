@@ -22,6 +22,16 @@ fun int_list_to_string(xs: int list) =
     "[" ^ formatter xs ^ "]"
   end
 
+fun string_list_to_string(xs: string list) =
+  let 
+    fun formatter(xs: string list) =
+      if null xs 
+      then "" 
+      else hd xs ^ (if null (tl xs) then "" else ", ") ^ formatter(tl xs)
+  in
+    "[" ^ formatter xs ^ "]"
+  end
+
 fun triple_to_string(x: (int*int*int)) = 
   let 
     val (a, b, c) = x
@@ -51,6 +61,15 @@ fun test_date(ret_value: (int*int*int) option, exp_value: (int*int*int) option) 
 
 fun test_int_list(ret_value: int list, exp_value: int list) =
   ret_value = exp_value orelse raise Fail("Expectation failed: expected - " ^ int_list_to_string exp_value ^ ", found - " ^ int_list_to_string ret_value);
+
+fun test_string_list(ret_value: string list, exp_value: string list) =
+  ret_value = exp_value orelse raise Fail("Expectation failed: expected - " ^ string_list_to_string exp_value ^ ", found - " ^ string_list_to_string ret_value);
+
+fun test_string_option_list(ret_value: string list option, exp_value: string list option) =
+  case (ret_value, exp_value) of
+       (NONE, NONE) => true
+     | (SOME a, SOME b) => a = b orelse raise Fail("Expectation failed: expected - " ^ string_list_to_string b ^ ", found - " ^ string_list_to_string a)
+     | _ => raise Fail("Expectation failed: expected");
 
 fun test_triple_list(ret_value: (int*int*int) list, exp_value: (int*int*int) list) =
   ret_value = exp_value orelse raise Fail("Expectation failed: expected - " ^ triple_list_to_string exp_value ^ ", found - " ^ triple_list_to_string ret_value);
