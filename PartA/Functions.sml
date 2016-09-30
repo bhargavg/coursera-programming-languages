@@ -5,3 +5,7 @@ fun pow(x: int, y: int) =
 
 fun cube(x: int) =
   pow(x, 3)
+
+
+(* Firstclass functions *)
+
