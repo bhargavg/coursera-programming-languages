@@ -1,6 +1,6 @@
 # Notes from: Programming Languages - Dan Grossman (Coursera)
 
-## Install sml 
+## Install sml
  On Ubuntu:
 
 ```bash
